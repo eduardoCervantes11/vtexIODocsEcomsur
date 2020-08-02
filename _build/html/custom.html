@@ -110,6 +110,13 @@ __typename: &quot;SKU&quot;
 <h2>Detecting type device<a class="headerlink" href="#detecting-type-device" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you need to know what device the user is using in order to return the appropriate component.</p>
 <p>Below I show you how to do it:</p>
+<p>You need to import the module</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">useDevice</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;vtex.device-detector&quot;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">isMobile</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useDevice</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>isMobile</strong> now contains a boolean value true if is mobile and false if is not</p>
 </div>
 </div>
 

@@ -92,3 +92,14 @@ Detecting type device
 Sometimes you need to know what device the user is using in order to return the appropriate component.
 
 Below I show you how to do it:
+
+You need to import the module
+
+.. code-block:: javascript
+
+  import { useDevice } from "vtex.device-detector";
+
+  const { isMobile } = useDevice();
+
+**isMobile** now contains a boolean value true if is mobile and false if is not
+
