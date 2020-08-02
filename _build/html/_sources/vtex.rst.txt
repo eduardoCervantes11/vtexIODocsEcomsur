@@ -10,4 +10,4 @@ VTEX Styleguide has a default iconography that is used in all VTEX IO store's co
 
 Follow its instructions and add the nex line netx to the path.::
 
-fill="currentColor"
+``fill="currentColor"``

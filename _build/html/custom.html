@@ -46,7 +46,70 @@
 </div>
 <div class="section" id="getting-product-data">
 <h2>Getting product data<a class="headerlink" href="#getting-product-data" title="Permalink to this headline">¶</a></h2>
-<p>some shit</p>
+<p>Naturally you will need to use the product information to work with it in your custom component. Here we show you how to implement it:</p>
+<p>Go to your <strong>ts</strong> main page for your component and import the next one</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">useProduct</span> <span class="nx">from</span> <span class="s2">&quot;vtex.product-context/useProduct&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We provide you the next example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// grab product information</span>
+<span class="kr">const</span> <span class="nx">valuesFromContext</span> <span class="o">=</span> <span class="nx">useProduct</span><span class="p">();</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">selectedItem</span><span class="p">,</span> <span class="nx">skuSelector</span><span class="p">,</span> <span class="nx">product</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">valuesFromContext</span><span class="p">;</span>
+
+ <span class="kr">const</span> <span class="nx">images</span><span class="o">:</span> <span class="nx">any</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">imagePaths</span><span class="p">;</span>
+
+  <span class="c1">// if there&#39;s a image sku defined</span>
+  <span class="k">if</span> <span class="p">(</span>
+    <span class="nx">product</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">product</span><span class="p">.</span><span class="nx">items</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">skuSelector</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">skuSelector</span><span class="p">.</span><span class="nx">selectedImageVariationSKU</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">skuItem</span><span class="o">:</span> <span class="nx">any</span> <span class="o">=</span> <span class="nx">product</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+      <span class="p">(</span><span class="nx">sku</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">sku</span><span class="p">.</span><span class="nx">itemId</span> <span class="o">===</span> <span class="nx">skuSelector</span><span class="p">.</span><span class="nx">selectedImageVariationSKU</span>
+    <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">skuItem</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">imagePaths</span> <span class="o">=</span> <span class="nx">skuItem</span><span class="p">.</span><span class="nx">images</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">imagePaths</span> <span class="o">&amp;&amp;</span> <span class="nx">selectedItem</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">imagePaths</span> <span class="o">=</span> <span class="nx">selectedItem</span><span class="p">.</span><span class="nx">images</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="nx">imagePaths</span> <span class="o">||</span> <span class="p">[]).</span><span class="nx">map</span><span class="p">(</span><span class="nx">generateImageConfig</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[,</span> <span class="nx">product</span><span class="p">,</span> <span class="nx">skuSelector</span><span class="p">,</span> <span class="nx">selectedItem</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Now <strong>images</strong> have product data and you will be able to use it</p>
+<p>Let’s explain the code above:</p>
+<p>selectedItem contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{itemId: &quot;60&quot;, name: &quot;Tnf Black XS&quot;, nameComplete: &quot;Parka The North Face Mujer Tnf Black XS&quot;, complementName: &quot;&quot;, ean: &quot;680975607741&quot;, …}
+attachments: []
+complementName: &quot;&quot;
+ean: &quot;680975607741&quot;
+estimatedDateArrival: null
+images: (4) [{…}, {…}, {…}, {…}]
+itemId: &quot;60&quot;
+kitItems: []
+measurementUnit: &quot;un&quot;
+name: &quot;Tnf Black XS&quot;
+nameComplete: &quot;Parka The North Face Mujer Tnf Black XS&quot;
+referenceId: [{…}]
+sellers: [{…}]
+unitMultiplier: 1
+variations: (3) [{…}, {…}, {…}]
+videos: []
+__typename: &quot;SKU&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="detecting-type-device">
+<h2>Detecting type device<a class="headerlink" href="#detecting-type-device" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you need to know what device the user is using in order to return the appropriate component.</p>
+<p>Below I show you how to do it:</p>
 </div>
 </div>
 
@@ -73,6 +136,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Components</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#tsconfig-json">tsconfig.json</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-product-data">Getting product data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detecting-type-device">Detecting type device</a></li>
 </ul>
 </li>
 </ul>
