@@ -6,9 +6,15 @@
 Welcome to vtexIODocsEcomsur's documentation!
 =============================================
 
+This is a documentation created by ecomsurmx team and its porpuse is
+help the development in vtexIO. 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   vtex
+   custom
 
 
 
